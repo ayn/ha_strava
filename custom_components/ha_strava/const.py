@@ -9,6 +9,7 @@ CONFIG_ENTRY_TITLE = "Strava"
 AUTH_CALLBACK_PATH = "/auth/external/callback"
 OAUTH2_AUTHORIZE = "https://www.strava.com/oauth/authorize"
 OAUTH2_TOKEN = "https://www.strava.com/oauth/token"
+OAUTH2_PROFILE_TIMEOUT_SECONDS = 20
 OAUTH2_SCOPES = "activity:read_all,profile:read_all,activity:write"
 
 # Services
@@ -58,6 +59,12 @@ CONF_WEBHOOK_ID = "webhook_id"
 CONF_CALLBACK_URL = "callback_url"
 WEBHOOK_SUBSCRIPTION_URL = "https://www.strava.com/api/v3/push_subscriptions"
 
+# Log redaction: credentials that may appear in URLs / error text must never be logged
+LOG_REDACTED_PLACEHOLDER = "<redacted>"
+LOG_REDACT_PATTERN = re.compile(
+    r"\b(client_secret|access_token|refresh_token|code)=['\"]?[^&\s'\"]*", re.IGNORECASE
+)
+
 # Strava API tier / shared-app mode
 CONF_STRAVA_APP_MODE = "strava_app_mode"
 STRAVA_APP_MODE_SOLO = "solo"  # 1-to-1: one API app per user (default)
@@ -91,6 +98,7 @@ CONF_STRAVA_RELOAD_EVENT = "ha_strava_reload"
 CONF_IMG_UPDATE_EVENT = "ha_strava_new_images"
 CONF_IMG_ROTATE_EVENT = "ha_strava_rotate_images"
 EVENT_ACTIVITIES_UPDATE = "ha_strava_activities_update"
+EVENT_ACTIVITY_CREATED = "ha_strava_activity_created"
 EVENT_ACTIVITY_IMAGES_UPDATE = "ha_strava_activity_images_update"
 EVENT_SUMMARY_STATS_UPDATE = "ha_strava_stats_update"
 
