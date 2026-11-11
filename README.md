@@ -1,7 +1,37 @@
 # Strava integration for Home Assistant (Unofficial)
 
+## Temporary companion fork
+
+This fork of [craibo/ha_strava](https://github.com/craibo/ha_strava) provides
+the activity-created webhook event required by
+[Strava Activity Tools](https://github.com/ayn/ha-strava-activity-tools) while
+upstream reviews [#349](https://github.com/craibo/ha_strava/pull/349).
+Release **4.6.8.post1** also includes the legacy reauthorization fix from
+[#352](https://github.com/craibo/ha_strava/pull/352) and deterministic retry tests
+from [#351](https://github.com/craibo/ha_strava/pull/351). The proposed generic
+fetch/write actions in #353 are not included or required by the companion.
+
+For a **new provider installation**, add `https://github.com/ayn/ha_strava`
+as a custom **Integration** repository in HACS or Marketplace, download
+**4.6.8.post1**, restart HA, and configure Strava using the instructions below.
+Then install Strava Activity Tools separately. Minimum HA version: 2026.10.4.
+The upstream integration domain, account configuration and webhook URL are unchanged.
+
+**Already using upstream?** Marketplace 2026.11.1 prevents two repositories from
+owning the same integration and cannot forget an installed repository while
+retaining its configuration. Adding this URL is not an in-place source switch.
+Do not delete your Strava account configuration to work around it. Existing
+patched installations should keep upstream updates disabled until a supported
+transfer or an upstream release containing the event is available. Manual
+reinstallation through the upstream Marketplace page can still overwrite patches.
+
+Fork releases are maintained separately from upstream. Report fork-specific
+problems [here](https://github.com/ayn/ha_strava/issues); upstream development
+and attribution remain below. A future migration back to upstream requires
+verifying the needed features and preserving the existing account configuration.
+
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/craibo/ha_strava?color=41BDF5&style=for-the-badge)](https://github.com/craibo/ha_strava/releases/latest)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/ayn/ha_strava?color=41BDF5&style=for-the-badge)](https://github.com/ayn/ha_strava/releases/latest)
 [![Integration Usage](https://img.shields.io/badge/dynamic/json?color=41BDF5&style=for-the-badge&logo=home-assistant&label=usage&suffix=%20installs&cacheSeconds=15600&url=https://analytics.home-assistant.io/custom_integrations.json&query=$.ha_strava.total)](https://analytics.home-assistant.io/)
 
 <img src="https://raw.githubusercontent.com/craibo/ha_strava/main/img/api_logo_pwrdBy_strava_stack_light.png">
